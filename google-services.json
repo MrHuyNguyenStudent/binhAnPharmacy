@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1067729404325",
+    "project_id": "binhanpharmacy-810e4",
+    "storage_bucket": "binhanpharmacy-810e4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1067729404325:android:4f4c002ca6d11533d1684c",
+        "android_client_info": {
+          "package_name": "vn.edu.iuh.fit.binh_an_pharmacy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqNsmtcxCix4yWVQb8bWH29SeK6Rt0t-I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
