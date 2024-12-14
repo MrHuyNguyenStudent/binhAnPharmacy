@@ -10,7 +10,7 @@ class WelcomeScreen extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Colors.white, // Thay đổi màu nền thành trắng
+      backgroundColor: Colors.white,
       body: Center(
         child: SingleChildScrollView(
           child: Column(
@@ -31,26 +31,13 @@ class WelcomeScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: screenWidth * 0.1,
                         fontWeight: FontWeight.bold,
-                        color: Colors.blue, // Thay đổi màu chữ thành xanh
+                        color: Colors.teal,
                       ),
                     ),
                   ],
                 ),
               ),
               SizedBox(height: screenHeight * 0.1),
-
-              // // Welcome Text
-              // Text(
-              //   "Bình An xin chào!",
-              //   style: TextStyle(
-              //     fontSize: screenWidth * 0.08,
-              //     fontWeight: FontWeight.bold,
-              //     color: Colors.green, // Thay đổi màu chữ thành xanh
-              //   ),
-              // ),
-              // SizedBox(height: screenHeight * 0.05),
-
-              // Create Account Button
               Container(
                 width: screenWidth * 0.8,
                 child: ElevatedButton(
@@ -61,7 +48,7 @@ class WelcomeScreen extends StatelessWidget {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blueAccent, // Thay đổi màu nền thành trắng
+                    backgroundColor: Colors.teal,
                     padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
@@ -71,7 +58,7 @@ class WelcomeScreen extends StatelessWidget {
                     "Đăng ký ",
                     style: TextStyle(
                       fontSize: screenWidth * 0.05,
-                      color: Colors.white, // Thay đổi màu chữ thành xanh
+                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -89,7 +76,7 @@ class WelcomeScreen extends StatelessWidget {
                     );
                   },
                   style: OutlinedButton.styleFrom(
-                    side: BorderSide(color: Colors.blue, width: 2), // Thay đổi màu viền thành xanh
+                    side: BorderSide(color: Colors.teal, width: 2),
                     padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
@@ -99,7 +86,7 @@ class WelcomeScreen extends StatelessWidget {
                     "Đăng nhập",
                     style: TextStyle(
                       fontSize: screenWidth * 0.05,
-                      color: Colors.blue, // Thay đổi màu chữ thành xanh
+                      color: Colors.teal,
                     ),
                   ),
                 ),
@@ -128,8 +115,8 @@ class WelcomeScreen extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
       child: CircleAvatar(
-        backgroundColor: Colors.blue, // Thay đổi màu nền thành xanh
-        child: Icon(icon, color: Colors.white), // Thay đổi màu icon thành trắng
+        backgroundColor: Colors.teal,
+        child: Icon(icon, color: Colors.white),
       ),
     );
   }

@@ -47,7 +47,7 @@ class MedicinesCardWidget extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                SizedBox(height: 4),
+                SizedBox(height: 3),
                 // Loại thuốc (ví dụ: Thuốc kê đơn, không kê đơn)
                 Text(
                   product.loaiThuoc,
@@ -56,7 +56,7 @@ class MedicinesCardWidget extends StatelessWidget {
                     color: Colors.grey,
                   ),
                 ),
-                SizedBox(height: 8),
+                SizedBox(height: 7),
                 // Giá bán sản phẩm (nếu có giá)
                 Text(
                   'Giá: ${product.danhSachPhienBan.isNotEmpty ? product.danhSachPhienBan[0].giaBanQuyDoi : 'Liên hệ'} đ/${product.danhSachPhienBan[0].donViQuyDoi}',
@@ -67,7 +67,7 @@ class MedicinesCardWidget extends StatelessWidget {
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
-                SizedBox(height: 7),
+                SizedBox(height: 6),
                 // Nút chọn sản phẩm
                 ElevatedButton(
                   onPressed: () {

@@ -1,6 +1,7 @@
 import 'package:binh_an_pharmacy/providers/cart_provider.dart';
 import 'package:binh_an_pharmacy/screens/checkout_now_screen.dart';
 import 'package:binh_an_pharmacy/screens/checkout_screen.dart';
+import 'package:binh_an_pharmacy/screens/welcome_screen.dart';
 import 'package:binh_an_pharmacy/services/cart_item_services.dart';
 import 'package:binh_an_pharmacy/services/user_service.dart';
 import 'package:flutter/material.dart';
@@ -132,13 +133,23 @@ class ProductSelectionBottomSheet extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () async {
                         try {
-                          // ID khách hàng (lấy từ SharedPreferences)
                           String? khachHangId = await UserService.getAccessToken();
                           print("id ${khachHangId}");
                           if (khachHangId == null) {
-                            throw Exception('Không tìm thấy thông tin khách hàng!');
+                            // Hiển thị thông báo
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Bạn cần đăng nhập để tiếp tục'),
+                                backgroundColor: Colors.teal,
+                              ),
+                            );
+                            // Điều hướng về màn hình đăng nhập
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => WelcomeScreen()),
+                            );
+                            return; // Dừng việc thực hiện tiếp
                           }
-
                           // Lấy ID phiên bản sản phẩm
                           final selectedPhienBan = product.danhSachPhienBan.firstWhere(
                                 (phienBan) => phienBan.donViQuyDoi == selectedOption,
@@ -154,12 +165,7 @@ class ProductSelectionBottomSheet extends StatelessWidget {
                             Provider.of<CartProvider>(context, listen: false).loadCartItems();
                             // Sử dụng BuildContext của ProductSelectionBottomSheet
                             setState(() {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text('Thêm vào giỏ hàng thành công!'),
-                                  backgroundColor: Colors.teal,
-                                ),
-                              );
+                              showPaseMessage(context, 'Thêm vào giỏ hàng thành công!');
                             });
                           }
                         } catch (e) {
@@ -190,6 +196,29 @@ class ProductSelectionBottomSheet extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () async {
                         try {
+                          String? khachHangId = await UserService.getAccessToken();
+                          print("id ${khachHangId}");
+                          if (khachHangId == null) {
+                            // Hiển thị thông báo
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Bạn cần đăng nhập để tiếp tục'),
+                                backgroundColor: Colors.teal,
+                              ),
+                            );
+                            // Điều hướng về màn hình đăng nhập
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => WelcomeScreen()),
+                            );
+                            return; // Dừng việc thực hiện tiếp
+                          }
+                          // Kiểm tra nếu tổng giá trị đơn hàng nhỏ hơn 10,000
+                          if (totalPrice < 10000) {
+                            // Hiển thị thông báo lên trên màn hình bằng Overlay
+                            showOverlayMessage(context, 'Hệ thống chỉ nhận đơn hàng lớn hơn 10,000 đ');
+                            return; // Dừng lại, không tiếp tục với bước thanh toán
+                          }
                           // Lấy thông tin phiên bản sản phẩm được chọn
                           final selectedPhienBan = product.danhSachPhienBan.firstWhere(
                                 (phienBan) => phienBan.donViQuyDoi == selectedOption,
@@ -236,4 +265,69 @@ class ProductSelectionBottomSheet extends StatelessWidget {
       },
     );
   }
+}
+
+void showOverlayMessage(BuildContext context, String message) {
+  final overlay = Overlay.of(context);
+  final overlayEntry = OverlayEntry(
+    builder: (context) => Positioned(
+      bottom: MediaQuery.of(context).padding.bottom + 10,  // Vị trí thông báo ở dưới cùng
+      left: 20,
+      right: 20,
+      child: Material(
+        color: Colors.transparent,
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          decoration: BoxDecoration(
+            color: Colors.teal,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Text(
+            message,
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      ),
+    ),
+  );
+
+  // Thêm overlay vào màn hình
+  overlay.insert(overlayEntry);
+
+  // Xóa overlay sau 3 giây
+  Future.delayed(Duration(seconds: 2), () {
+    overlayEntry.remove();
+  });
+}
+void showPaseMessage(BuildContext context, String message) {
+  final overlay = Overlay.of(context);
+  final overlayEntry = OverlayEntry(
+    builder: (context) => Positioned(
+      bottom: MediaQuery.of(context).padding.bottom + 10,  // Vị trí thông báo ở dưới cùng
+      left: 20,
+      right: 20,
+      child: Material(
+        color: Colors.transparent,
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          decoration: BoxDecoration(
+            color: Colors.teal,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Text(
+            message,
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      ),
+    ),
+  );
+
+  // Thêm overlay vào màn hình
+  overlay.insert(overlayEntry);
+
+  // Xóa overlay sau 3 giây
+  Future.delayed(Duration(seconds: 2), () {
+    overlayEntry.remove();
+  });
 }

@@ -176,7 +176,7 @@ class _CheckoutNowScreenState extends State<CheckoutNowScreen> {
                       (route) => false, // Loại bỏ toàn bộ các màn hình trước đó
                 );
               },
-              child: Text("OK"),
+              child: Text("Xác nhận"),
             ),
           ],
         ),

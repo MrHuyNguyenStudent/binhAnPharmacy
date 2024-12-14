@@ -76,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(
                           fontSize: screenWidth * 0.09,
                           fontWeight: FontWeight.bold,
-                          color: Colors.blue,
+                          color: Colors.teal,
                         ),
                       ),
                     ],
@@ -89,10 +89,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     labelText: 'Username',
                     filled: true,
                     fillColor: Colors.blue[50],
-                    labelStyle: TextStyle(color: Colors.blue),
+                    labelStyle: TextStyle(color: Colors.teal),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide(color: Colors.blue),
+                      borderSide: BorderSide(color: Colors.teal),
                     ),
                   ),
                 ),
@@ -105,17 +105,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     labelText: 'Password',
                     filled: true,
                     fillColor: Colors.blue[50],
-                    labelStyle: TextStyle(color: Colors.blue),
+                    labelStyle: TextStyle(color: Colors.teal),
                     suffixIcon: IconButton(
                       icon: Icon(
                         _isPasswordHidden ? Icons.visibility_off : Icons.visibility,
-                        color: Colors.blue,
+                        color: Colors.teal,
                       ),
                       onPressed: _togglePasswordView, // Toggle function
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide(color: Colors.blue),
+                      borderSide: BorderSide(color: Colors.teal),
                     ),
                   ),
                 ),
@@ -127,7 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () {},
                       child: Text(
                         'Quên mật khẩu?',
-                        style: TextStyle(color: Colors.blue),
+                        style: TextStyle(color: Colors.teal),
                       ),
                     ),
                   ],
@@ -141,10 +141,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Colors.teal,
                   ),
                   child: Text(
-                    'Login',
+                    'Đăng nhập',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -165,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       child: Text(
                         'Đăng ký',
-                        style: TextStyle(color: Colors.blue),
+                        style: TextStyle(color: Colors.teal),
                       ),
                     ),
                   ],

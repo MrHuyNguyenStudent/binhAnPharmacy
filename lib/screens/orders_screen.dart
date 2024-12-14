@@ -1,5 +1,7 @@
 import 'package:binh_an_pharmacy/models/order.dart';
+import 'package:binh_an_pharmacy/screens/welcome_screen.dart';
 import 'package:binh_an_pharmacy/services/orders_service.dart';
+import 'package:binh_an_pharmacy/services/user_service.dart';
 import 'package:binh_an_pharmacy/widgets/custom_tabbar_widget.dart';
 import 'package:binh_an_pharmacy/widgets/order_item_widget.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +13,7 @@ class OrdersScreen extends StatefulWidget {
 }
 
 class _OrdersScreenState extends State<OrdersScreen> with TickerProviderStateMixin {
+  bool _isLoggedIn = false;
   int _selectedIndex = 3;
   late TabController _tabController;
   late ApiOrdersService _apiOrdersService;
@@ -28,8 +31,22 @@ class _OrdersScreenState extends State<OrdersScreen> with TickerProviderStateMix
     _tabController = TabController(length: 6, vsync: this);
     _apiOrdersService = ApiOrdersService();
     _fetchOrders();
+    _checkLoginStatus();
   }
-
+// Kiểm tra trạng thái đăng nhập
+  void _checkLoginStatus() async {
+    String? token = await UserService.getAccessToken();  // Lấy token từ SharedPreferences
+    if (token == null) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => WelcomeScreen()),
+      );
+    } else {
+      setState(() {
+        _isLoggedIn = true;
+      });
+    }
+  }
   Future<void> _fetchOrders() async {
     try {
       final newOrders = await _apiOrdersService.getAllHoaDon();
@@ -93,6 +110,11 @@ class _OrdersScreenState extends State<OrdersScreen> with TickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
+    if (!_isLoggedIn) {
+      return Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text(

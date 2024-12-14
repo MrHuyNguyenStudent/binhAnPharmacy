@@ -43,6 +43,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
       });
     }
   }
+  // Hàm kiểm tra email với đuôi "@gmail.com"
+  bool _isValidEmail(String email) {
+    final emailRegex = RegExp(r'^[a-zA-Z0-9._%+-]+@gmail\.com$');
+    return emailRegex.hasMatch(email);
+  }
+  bool isValidPassword(String password) {
+    final passwordRegex = RegExp(
+      r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{12,}$',
+    );
+    return passwordRegex.hasMatch(password);
+  }
   // Hàm xử lý đăng ký
   Future<void> _register() async {
     final username = usernameController.text;
@@ -55,7 +66,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
         : null;
     final password = passwordController.text;
     final confirmPassword = confirmPasswordController.text;
-
+    // Kiểm tra định dạng email
+    if (!_isValidEmail(email)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Email phải có đuôi @gmail.com")),
+      );
+      return;
+    }
+    // Kiểm tra định dạng số điện thoại (bắt đầu bằng 0 và có 10 chữ số)
+    if (!RegExp(r"^0\d{9}$").hasMatch(phone)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Số điện thoại không hợp lệ")),
+      );
+      return;
+    }
+    if (!isValidPassword(password)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Mật khẩu phải có ít nhất 12 ký tự cả chữ và số, 1 ký tự chữ hoa, 1 ký tự đặc biệt")),
+      );
+      return;
+    }
     // Kiểm tra mật khẩu và xác nhận mật khẩu
     if (password != confirmPassword) {
       ScaffoldMessenger.of(context).showSnackBar(

@@ -91,7 +91,10 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
       },
     );
   }
-
+  bool isPhoneNumberValid(String phoneNumber) {
+    final phoneRegex = RegExp(r"^0\d{9}$");
+    return phoneRegex.hasMatch(phoneNumber);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -205,6 +208,12 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
             SizedBox(height: 16),
             ElevatedButton(
               onPressed: () async {
+                if (soDienThoaiController.text.isEmpty || !isPhoneNumberValid(soDienThoaiController.text)) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Số điện thoại không hợp lệ!')),
+                  );
+                  return;
+                }
                 try {
                   // Gọi phương thức thêm địa chỉ mới
                   int? diaChiKhachHangId = await _diaChiService.addNewAddress(

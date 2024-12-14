@@ -94,7 +94,10 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
       },
     );
   }
-
+  bool isPhoneNumberValid(String phoneNumber) {
+    final phoneRegex = RegExp(r"^0\d{9}$");
+    return phoneRegex.hasMatch(phoneNumber);
+  }
   @override
   void initState() {
     super.initState();
@@ -225,6 +228,12 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
             SizedBox(height: 16),
             ElevatedButton(
               onPressed: () async {
+                if (soDienThoaiController.text.isEmpty || !isPhoneNumberValid(soDienThoaiController.text)) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Số điện thoại không hợp lệ!')),
+                  );
+                  return;
+                }
                 try {
                   // Gọi phương thức cập nhật địa chỉ
                   await _diaChiService.updateAddress(

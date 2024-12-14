@@ -51,25 +51,6 @@ class ApiOrdersService {
         "soLuong": item.soLuong,
         "gia": item.gia,
       }).toList(),
-      "giaoHangId": "string",
-      "giaoHang": {
-        "id": "string",
-        "maDonRutGon": "string",
-        "tenNguoiGui": "string",
-        "soDienThoaiNguoiGui": "string",
-        "diaChiNguoiGui": "string",
-        "quanHuyenNguoiGui": "string",
-        "tinhThanhNguoiGui": "string",
-        "tenNguoiNhan": "string",
-        "soDienThoaiNguoiNhan": "string",
-        "diaChiNguoiNhan": "string",
-        "xaPhuongNguoiNhan": "string",
-        "quanHuyenNguoiNhan": "string",
-        "tinhThanhNguoiNhan": "string",
-        "trackingNumber": 0,
-        "thoiGianLayHangDuKien": "string",
-        "thoiGianGiaoHangDuKien": "string"
-      },
       "timeline": [
         {
           "id": 0,
@@ -134,24 +115,6 @@ class ApiOrdersService {
           "gia": 0
         }
       ],
-      "giaoHang": {
-        "id": "string",
-        "maDonRutGon": "string",
-        "tenNguoiGui": "string",
-        "soDienThoaiNguoiGui": "string",
-        "diaChiNguoiGui": "string",
-        "quanHuyenNguoiGui": "string",
-        "tinhThanhNguoiGui": "string",
-        "tenNguoiNhan": "string",
-        "soDienThoaiNguoiNhan": "string",
-        "diaChiNguoiNhan": "string",
-        "xaPhuongNguoiNhan": "string",
-        "quanHuyenNguoiNhan": "string",
-        "tinhThanhNguoiNhan": "string",
-        "trackingNumber": 0,
-        "thoiGianLayHangDuKien": "string",
-        "thoiGianGiaoHangDuKien": "string"
-      },
       "timeline": [
         {
           "id": 0,

@@ -133,20 +133,26 @@ class _CartScreenState extends State<CartScreen> {
               ),
               ElevatedButton(
                 onPressed: () {
-
-                  // Kiểm tra nếu giỏ hàng không rỗng
-                  if (cartProvider.calculateTotalPrice()>0) {
+                  if (cartProvider.calculateTotalPrice() == 0) {
+                    // Hiển thị thông báo nếu tổng giá trị giỏ hàng < 0
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text('Chọn vào sản phẩm bạn muốn thanh toán!'),
+                      backgroundColor: Colors.teal, // Màu sắc thông báo
+                    ));
+                  } else if (cartProvider.calculateTotalPrice() < 10000 && cartProvider.calculateTotalPrice() > 0) {
+                    // Hiển thị thông báo nếu tổng giá trị giỏ hàng nhỏ hơn 10.000
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text('Hệ thống chỉ chấp nhận đơn hàng lớn hơn 10.000 đ'),
+                      backgroundColor: Colors.teal, // Màu sắc thông báo
+                    ));
+                  } else if (cartProvider.calculateTotalPrice() > 0) {
+                    // Nếu tổng giá trị giỏ hàng hợp lệ, chuyển đến màn hình thanh toán
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => CheckoutScreen(cartItems: cartProvider.cartItems),
                       ),
                     );
-                  } else {
-                    // Hiển thị thông báo nếu giỏ hàng trống
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text('Chọn vào sản phẩm bạn muốn thanh toán!'),
-                    ));
                   }
                 },
                 child: Text('Mua hàng (${cartProvider.selectedItemsCount()})'),
